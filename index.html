@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2048 Game</title>
+  <link rel="stylesheet" type="text/css" href="css.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="score-container">
+        <div id="score">0</div>
+        <div id="best-score">0</div>
+        <div class="btns">
+          <button id="reset">reset</button>
+        </div>
+    </div>
+    <div id="game-container">
+    </div>
+
+  <script src="script.js"></script>
+  <script integrity="">
+    navigator.serviceWorker.register('service-worker.published.js');
+</script>
+</body>
+</html>
