@@ -1,9 +1,9 @@
  const CACHE_NAME = '2048-game-cache-v1';
 const urlsToCache = [
   '/',
-  '/css.css',
+  '/styles.css',
   '/script.js',
-  '/favicon.ico',
+  '/icon-192.png',
 ];
 
 self.addEventListener('install', event => {
