@@ -12,6 +12,8 @@
   body {
     font-family: cursive;
     overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
   
   #game-container {
@@ -72,4 +74,17 @@
     color: #686767;
   }
   
-  
+  @media (max-width: 600px) {
+    #game-container {
+      width: 75vw;
+      height: 75vw;
+      margin: 5% auto;
+    }
+    #score-container {
+ 
+      width: 250px;
+       }
+    .game-cell {
+      font-size: 24px;
+    }
+  }
