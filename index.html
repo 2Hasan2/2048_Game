@@ -15,6 +15,7 @@
 </head>
 <body>
     <div id="score-container">
+      <span class="version-label">v0.0.1 Beta</span>
         <div id="score">0</div>
         <div id="best-score">0</div>
         <div class="btns">
@@ -23,6 +24,7 @@
     </div>
     <div id="game-container">
     </div>
+    
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // https://github.com/rafrex/spa-github-pages
@@ -56,7 +58,7 @@
   <script integrity="">
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js')
+    navigator.serviceWorker.register('2048_Game/service-worker.js')
       .then(registration => {
         console.log('Service worker registered:', registration);
       })

@@ -3,7 +3,12 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+  .version-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    margin-right: 10px;
+  }
   body {
     font-family: cursive;
     overflow: hidden;
@@ -40,7 +45,7 @@
     padding: 10px;
     border-radius: 10px;
   }
-  
+ 
   #score {
     font-size: 24px;
     font-weight: bold;
@@ -86,7 +91,7 @@
       }
       #score-container {
         width: 800px;
-        margin: 20px auto;
+        margin: 20px 50px auto;
         padding: 20px;
         border-radius: 20px;
       }
