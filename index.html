@@ -2,12 +2,20 @@
 <html>
 <head>
   <title>2048 Game</title>
-  <link rel="stylesheet" type="text/css" href="css.css">
+  <meta charset="UTF-8">
+  <base href="/2048_Game/" />
+  <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-192.png" integrity="" />
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" integrity="" />
+   <meta name="viewport" content="width=device-width" />
+  <meta property="og:image" content="icon-192.png"  integrity="">
+  <meta property="og:description" content='A 2048 Game' />
 </head>
 <body>
     <div id="score-container">
+      <span class="version-label">v0.0.4 Beta</span>
         <div id="score">0</div>
         <div id="best-score">0</div>
         <div class="btns">
@@ -16,10 +24,48 @@
     </div>
     <div id="game-container">
     </div>
-
+    
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafrex/spa-github-pages
+      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+      // ----------------------------------------------------------------------
+      // This script checks to see if a redirect is present in the query string
+      // and converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function (l) {
+          if (l.search) {
+              var q = {};
+              l.search.slice(1).split('&').forEach(function (v) {
+                  var a = v.split('=');
+                  q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+              });
+              if (q.p !== undefined) {
+                  window.history.replaceState(null, null,
+                      l.pathname.slice(0, -1) + (q.p || '') +
+                      (q.q ? ('?' + q.q) : '') +
+                      l.hash
+                  );
+              }
+          }
+      }(window.location))
+  </script>
   <script src="script.js"></script>
   <script integrity="">
-    navigator.serviceWorker.register('service-worker.published.js');
-</script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('2048_Game/service-worker.js')
+      .then(registration => {
+        console.log('Service worker registered:', registration);
+      })
+      .catch(error => {
+        console.error('Service worker registration failed:', error);
+      });
+  });
+}</script>
 </body>
 </html>

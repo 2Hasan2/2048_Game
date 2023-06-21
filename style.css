@@ -2,11 +2,22 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+     user-select: none;
   }
-  
+  .version-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #999;
+    margin-right: 10px;
+  }
   body {
     font-family: cursive;
     overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    overscroll-behavior-x: contain;
+
   }
   
   #game-container {
@@ -40,7 +51,7 @@
     padding: 10px;
     border-radius: 10px;
   }
-  
+ 
   #score {
     font-size: 24px;
     font-weight: bold;
@@ -67,41 +78,28 @@
     color: #686767;
   }
   
-  
-  @media (min-width: 768px) and (max-width: 1024px) {
-    /* Adjustments for tablets */
+  @media (max-width: 600px) {
     #game-container {
-      width: 50vw;
-      height: 50vw;
-      gap: 10px;
-      margin: 10% auto;
+      width: 75vw;
+      height: 75vw;
+      margin: 5% auto;
     }
+    #score{
+      font-size: 12px;
+    }
+    #best-score{
+      font-size: 10px;
+    }
+    #reset{
+      font-size: 12px;
+    }
+    #version-label{
+      font-size: 10px;
+    }
+    #score-container {
+      width: 250px;
+       }
     .game-cell {
-        border-radius: 10%;
-        font-size: xx-large;
-        color: #323030;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      #score-container {
-        width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        border-radius: 20px;
-      }
-      #score {
-        font-size: 50px;
-      }
-      
-      #best-score {
-        font-size: 30px;
-      }
-      #reset {
-        border-radius: 10px;
-        border: none;
-        padding: 19px;
-        font-size: 32px;
-      }
+      font-size: 24px;
+    }
   }
-  
