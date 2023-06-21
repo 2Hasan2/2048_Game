@@ -1,5 +1,6 @@
 // Initialize the game state
 var board = [];
+var size = 4
 var score = 0;
 var isGameOver = false;
 var bestScoreElement = document.getElementById("best-score");
@@ -36,7 +37,10 @@ function generateTile() {
 // Function to render the game board
 function renderBoard() {
   gameContainer.innerHTML = "";
-
+  gameContainer.style.cssText = `
+  grid-template-columns: repeat(${size}, 1fr);
+  grid-template-rows: repeat(${size}, 1fr);
+  `
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
       var cell = document.createElement("div");
@@ -158,14 +162,20 @@ function checkGameOver() {
   // Display alert if the game is over
   if (isGameOver) {
     updateScore(score);
-    alert("Game over! Score: " + score);
+    overGameMSG(score);
   }
+  return isGameOver
+}
+
+//Function to over game massage
+function overGameMSG(score) {
+  window.alert(`Loser, Your score is: ${score}`)
 }
 
 // Function to handle left movement
 function moveLeft() {
-  for (var i = 0; i < 4; i++) {
-    for (var j = 1; j < 4; j++) {
+  for (var i = 0; i < size; i++) {
+    for (var j = 0; j < size; j++) {
       if (board[i][j] !== 0) {
         for (var k = j; k > 0; k--) {
           if (board[i][k - 1] === 0 || board[i][k - 1] === board[i][k]) {
@@ -174,11 +184,13 @@ function moveLeft() {
               board[i][k - 1] *= 2;
               score += board[i][k - 1];
               updateScore(score);
+              board[i][k] = 0;
+              break;
             } else {
               // Move tile
               board[i][k - 1] = board[i][k];
+              board[i][k] = 0;
             }
-            board[i][k] = 0;
           }
         }
       }
@@ -189,21 +201,23 @@ function moveLeft() {
 
 // Function to handle right movement
 function moveRight() {
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < size; i++) {
     for (var j = 2; j >= 0; j--) {
       if (board[i][j] !== 0) {
-        for (var k = j; k < 3; k++) {
+        for (var k = j; k < size - 1; k++) {
           if (board[i][k + 1] === 0 || board[i][k + 1] === board[i][k]) {
             if (board[i][k + 1] === board[i][k]) {
               // Merge tiles
               board[i][k + 1] *= 2;
               score += board[i][k + 1];
               updateScore(score);
+              board[i][k] = 0;
+              break
             } else {
               // Move tile
               board[i][k + 1] = board[i][k];
+              board[i][k] = 0;
             }
-            board[i][k] = 0;
           }
         }
       }
@@ -214,8 +228,8 @@ function moveRight() {
 
 // Function to handle up movement
 function moveUp() {
-  for (var i = 1; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
+  for (var i = 0; i < size; i++) {
+    for (var j = 0; j < size; j++) {
       if (board[i][j] !== 0) {
         for (var k = i; k > 0; k--) {
           if (board[k - 1][j] === 0 || board[k - 1][j] === board[k][j]) {
@@ -224,11 +238,13 @@ function moveUp() {
               board[k - 1][j] *= 2;
               score += board[k - 1][j];
               updateScore(score);
+              board[k][j] = 0;
+              break;
             } else {
               // Move tile
               board[k - 1][j] = board[k][j];
+              board[k][j] = 0;
             }
-            board[k][j] = 0;
           }
         }
       }
@@ -240,7 +256,7 @@ function moveUp() {
 // Function to handle down movement
 function moveDown() {
   for (var i = 2; i >= 0; i--) {
-    for (var j = 0; j < 4; j++) {
+    for (var j = 0; j < size; j++) {
       if (board[i][j] !== 0) {
         for (var k = i; k < 3; k++) {
           if (board[k + 1][j] === 0 || board[k + 1][j] === board[k][j]) {
@@ -249,11 +265,13 @@ function moveDown() {
               board[k + 1][j] *= 2;
               score += board[k + 1][j];
               updateScore(score);
+              board[k][j] = 0;
+              break
             } else {
               // Move tile
               board[k + 1][j] = board[k][j];
+              board[k][j] = 0;
             }
-            board[k][j] = 0;
           }
         }
       }
@@ -263,9 +281,10 @@ function moveDown() {
 }
 
 // Function to update the score display
+bestScoreElement.innerText = localStorage.getItem("bestScore") || 0;
 function updateScore(score) {
   scoreElement.textContent = score;
-  if (score > parseInt(bestScoreElement.textContent)) {
+  if (score > +bestScoreElement.textContent) {
     bestScoreElement.textContent = score;
     localStorage.setItem("bestScore", score.toString());
   }
@@ -306,7 +325,7 @@ gameContainer.addEventListener("touchend", handleTouchEnd, false);
 // Function to handle keydown events
 function handleKeyDown(event) {
   if (isGameOver) return;
-  
+
   switch (event.key) {
     case 'ArrowLeft':
       moveLeft();
